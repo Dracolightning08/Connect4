@@ -6,31 +6,43 @@ from copy import deepcopy
 
 def get_computer_move(board, which_player):
     move = 4 #temporary
+    whoAmI = which_player #helps the AI remember who it is during loops. Will be 0 for player 1, and 1 for player 2.
     depthlimit = 3
     validMoves = utils.get_valid_moves(board)
     print(validMoves)
     potentialActions = []
     for i in range(len(validMoves)):
         newboard = deepcopy(board)
-        gameover, winner = playgame(newboard,which_player,validMoves[i]+1,0,depthlimit)
+        gameover, winner = playgame(newboard,which_player, whoAmI, validMoves[i]+1,0,depthlimit)
         potentialActions.append(winner)
     print(f"Potential Actions = {potentialActions}")
-    
+
+    """
+    Priorities:
+    9: Moves that will grant victory on your next turn
+    8: Moves that will grant victory on a later turn
+    7: Moves with no major change
+    6: Moves that grant an opponent victory
+    """
     #Below is shite. But it sorta works?
-    goodActions = []
-    opposition = (1 - which_player) + 1
-    print(f"Player: {which_player}")
-    print(f"Opposition: {opposition}")
-    for i in range(len(potentialActions)):
-        if potentialActions[i] != opposition:
-            #print(i)
-            if i in validMoves:
-                goodActions.append(i+1)
-    print(f"Good Actions: {goodActions}")
-    if which_player+1 in potentialActions:
-        move = potentialActions.index(which_player+1) + 1
-    else:
-        move = random.choice(goodActions)
+    #In any case, it will need a major rewrite following prioritizarion
+    
+    # goodActions = []
+    # opposition = (1 - which_player) + 1
+    # print(f"Player: {which_player}")
+    # print(f"Opposition: {opposition}")
+    # for i in range(len(potentialActions)):
+    #     if potentialActions[i] != opposition:
+    #         #print(i)
+    #         if i in validMoves:
+    #             goodActions.append(i+1)
+    # print(f"Good Actions: {goodActions}")
+    # if which_player+1 in potentialActions:
+    #     move = potentialActions.index(which_player+1) + 1
+    # else:
+    #     move = random.choice(goodActions)
+
+
     return move
 
 def simulate_moves(board,player, col):
@@ -44,7 +56,7 @@ def simulate_moves(board,player, col):
     #playgame(board,player,col, 1,1)
     return board
 
-def playgame(board,player,col,depth,depthlimit):
+def playgame(board,player,whoAmI,col,depth,depthlimit):
     #print("NEW ITERATION OF PLAYGAME")
     board = simulate_moves(board,player,col)
     #Checks if game is over (does not check for DQ via Illegal Move)
@@ -67,7 +79,7 @@ def playgame(board,player,col,depth,depthlimit):
     validMoves = utils.get_valid_moves(board)
     for i in range(len(validMoves)):
         newboard = deepcopy(board)
-        nextgameover, nextwinner = playgame(newboard, 1 - player, validMoves[i]+1, depth+1, depthlimit)
+        nextgameover, nextwinner =  playgame(newboard, 1 - player, whoAmI, validMoves[i]+1, depth+1, depthlimit)
         #print(f"nextgameover = {nextgameover}")
         #print(f"nextwinner = {nextwinner}")
 
