@@ -5,13 +5,9 @@ import utils
 from copy import deepcopy
 
 def get_computer_move(board, which_player):
-    #print(utils.get_next_available_rows(board))
-    move = 1
+    move = 1 #temporary
     validMoves = utils.get_valid_moves(board)
-    #simulate_moves(board,which_player,move)
     print(validMoves)
-    # board[0][4] = 1
-    # print(board)
     for i in range(len(validMoves)):
         newboard = deepcopy(board)
         simulate_moves(newboard,which_player,validMoves[i]+1)
@@ -24,7 +20,6 @@ def simulate_moves(board,player, col):
     #Updates the board
     col = col-1
     rows = utils.get_next_available_rows(board)
-    print(rows)
     row = rows[col]
     board[row][col] = player+1
     print(board)
