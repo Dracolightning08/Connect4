@@ -2,7 +2,7 @@
 # Connect Four AI player that always picks the leftmost column.
 
 import pdb
-import utils
+from connect4 import utils
 
 def get_computer_move(board, which_player):
     """Pick the leftmost available move.

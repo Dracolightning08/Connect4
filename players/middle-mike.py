@@ -4,7 +4,7 @@
 import numpy as np
 import pdb
 import random
-import utils
+from connect4 import utils
 
 def get_computer_move(board, which_player):
     """Pick the middlemost available move.

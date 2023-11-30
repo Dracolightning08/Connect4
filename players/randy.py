@@ -3,7 +3,7 @@
 
 import pdb
 import random
-import utils
+from connect4 import utils
 
 def get_computer_move(board, which_player):
     """Randomly select a move from the set of valid moves.

@@ -293,7 +293,7 @@ def setup(rows=6, cols=7):
     if rows < 4:
         raise Exception(f'ERROR: The number of rows ({rows}) must be at least 4. Check inputs.')
     if cols < 4:
-        raise Exception(f'ERROR: The number of columns ({columns}) must be at least 4. Check inputs.')
+        raise Exception(f'ERROR: The number of columns ({cols}) must be at least 4. Check inputs.')
 
     # Make game window
     wid = cols * (2.5 * DISC) + MARGIN * 2
@@ -364,7 +364,7 @@ def test():
     print('\nCONNECT FOUR')
     print('=' * 30)
     print('Testing utility functions...')
-    print(f'    Version: {getversion()}')
+    print(f'    Version: {get_version()}')
     print(f'    Making standard board...', end='')
     gui = setup()
     while True:

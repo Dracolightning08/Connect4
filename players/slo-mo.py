@@ -5,7 +5,7 @@
 import pdb
 import random
 import time
-import utils
+from connect4 import utils
 
 def get_computer_move(board, which_player):
     """*Slowly* select a random move from the set of valid moves.
