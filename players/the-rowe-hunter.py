@@ -11,6 +11,7 @@ def get_computer_move(board, which_player):
     validMoves = utils.get_valid_moves(board)
     print(validMoves)
     potentialActions = []
+    winner = -2
     for i in range(len(validMoves)):
         newboard = deepcopy(board)
         gameover, winner = playgame(newboard,which_player, whoAmI, validMoves[i]+1,0,depthlimit)
@@ -27,20 +28,20 @@ def get_computer_move(board, which_player):
     #Below is shite. But it sorta works?
     #In any case, it will need a major rewrite following prioritizarion
     
-    # goodActions = []
-    # opposition = (1 - which_player) + 1
-    # print(f"Player: {which_player}")
-    # print(f"Opposition: {opposition}")
-    # for i in range(len(potentialActions)):
-    #     if potentialActions[i] != opposition:
-    #         #print(i)
-    #         if i in validMoves:
-    #             goodActions.append(i+1)
-    # print(f"Good Actions: {goodActions}")
-    # if which_player+1 in potentialActions:
-    #     move = potentialActions.index(which_player+1) + 1
-    # else:
-    #     move = random.choice(goodActions)
+    goodActions = []
+    opposition = (1 - which_player) + 1
+    print(f"Player: {which_player}")
+    print(f"Opposition: {opposition}")
+    for i in range(len(potentialActions)):
+        if potentialActions[i] != opposition:
+            #print(i)
+            if i in validMoves:
+                goodActions.append(i+1)
+    print(f"Good Actions: {goodActions}")
+    if which_player+1 in potentialActions:
+        move = potentialActions.index(which_player+1) + 1
+    else:
+        move = random.choice(goodActions)
 
 
     return move
@@ -83,7 +84,7 @@ def playgame(board,player,whoAmI,col,depth,depthlimit):
         #print(f"nextgameover = {nextgameover}")
         #print(f"nextwinner = {nextwinner}")
 
-        #check if a later action was a victory for your opponent
+        # #check if a later action was a victory for your opponent
         if nextgameover:
             #print(newboard)
             #print(f"Victory for {nextwinner} detected")
