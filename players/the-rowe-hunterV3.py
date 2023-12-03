@@ -5,7 +5,7 @@ import utils
 from copy import deepcopy
 
 def get_computer_move(board, which_player):
-    depthLimit = 3
+    depthLimit = 3 #3 for best performance
     whoAmI = which_player
     move = 1 #temp
     validMoves = utils.get_valid_moves(board) #List of all moves that are possible
@@ -85,5 +85,6 @@ def chooseFinalMove(validMoves,outcomes,bestOutcome):
             if outcomes[i] != 1 and outcomes[i] in validMoves: #if the outcome is not an opponent victory
                 safeMoves.append(i)
         move = random.choice(safeMoves) + 1
+    #print(safeMoves)
     
     return move
