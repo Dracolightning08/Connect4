@@ -3,7 +3,9 @@ import pdb
 import random
 import utils
 from copy import deepcopy
+import time
 
+# attempting implementation of a time depth search instead of standard depth search
 
 def get_computer_move(board, which_player):
     depthLimit = 4  # 3 for best performance
